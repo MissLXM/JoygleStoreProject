@@ -1,5 +1,7 @@
-package cn.edu.mju.joygle.carousel.config;
+package cn.edu.mju.joygle.address.config;
 
+import cn.edu.mju.joygle.security.interceptor.TokenAuthenticationEntryPoint;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -11,7 +13,7 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 
 /**
  * ClassName: ResourceServerAutoConfiguration
- * Package: cn.edu.mju.joygle.carousel.config
+ * Package: cn.edu.mju.joygle.address.config
  * Description: 资源配置类
  *
  * @Author:wjh
@@ -30,6 +32,12 @@ public class ResourceServerAutoConfiguration extends ResourceServerConfigurerAda
     @Autowired
     private TokenStore tokenStore;
 
+    /**
+     * 令牌失效处理器
+     */
+    @Setter(onMethod_ = @Autowired)
+    private TokenAuthenticationEntryPoint tokenAuthenticationEntryPoint;
+
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http
@@ -37,7 +45,11 @@ public class ResourceServerAutoConfiguration extends ResourceServerConfigurerAda
                 .csrf().disable()
                 // 所有请求都拦截
                 .authorizeRequests()
-                .antMatchers("/**").authenticated();
+                .antMatchers("/**").authenticated()
+                .and()
+                .exceptionHandling()
+                // 权限异常处理器
+                .authenticationEntryPoint(tokenAuthenticationEntryPoint);
     }
 
     @Override

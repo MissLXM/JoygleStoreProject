@@ -1,4 +1,4 @@
-package cn.edu.mju.joygle.user.mapper;
+package cn.edu.mju.joygle.security.mapper;
 
 import cn.edu.mju.joygle.common.entity.StoreUser;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;

@@ -1,4 +1,4 @@
-package cn.edu.mju.joygle.statics.config;
+package cn.edu.mju.joygle.common.config;
 
 import org.springframework.context.annotation.Configuration;
 

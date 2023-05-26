@@ -1,0 +1,90 @@
+# 配置网关
+spring:
+  cloud:
+    gateway:
+      routes:
+        # 1.用户服务名称
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            # 访问 user 路径转发用户服务
+            - Path=/user/**
+        # 2.商品服务名称
+        - id: product-service
+          uri: lb://product-service
+          predicates:
+            # 访问 product 路径转发商品服务
+            - Path=/product/**
+
+        # 3.轮播图服务名称
+        - id: carousel-service
+          uri: lb://carousel-service
+          predicates:
+            # 访问 carousel 路径转发轮播图服务
+            - Path=/carousel/**
+
+        # 4.地址服务名称
+        - id: address-service
+          uri: lb://address-service
+          predicates:
+            # 访问 address 路径转发地址服务
+            - Path=/address/**
+
+        # 5.类别服务名称
+        - id: category-service
+          uri: lb://category-service
+          predicates:
+            # 访问 category 路径转发类别服务
+            - Path=/category/**
+
+        # 6.收藏服务名称
+        - id: collection-service
+          uri: lb://collection-service
+          predicates:
+            # 访问 collection 路径转发收藏服务
+            - Path=/collection/**
+
+        # 7.购物车服务名称
+        - id: trolley-service
+          uri: lb://trolley-service
+          predicates:
+            # 访问 trolley 路径转发购物车服务
+            - Path=/trolley/**
+
+        # 8.订单服务名称
+        - id: orders-service
+          uri: lb://orders-service
+          predicates:
+            # 访问 orders 路径转发订单服务
+            - Path=/orders/**
+
+        # 9.静态资源服务名称
+        - id: static-service
+          uri: lb://static-service
+          predicates:
+            # 访问 public 路径转发静态资源服务
+            - Path=/public/**
+
+        # 10.后台服务名称
+        - id: admin-service
+          uri: lb://admin-service
+          predicates:
+            # 访问 admin 路径转发后台服务
+            - Path=/admin/**
+
+        # 11.后台服务名称
+        - id: security-service
+          uri: lb://security-service
+          predicates:
+            # 访问 admin 路径转发后台服务
+            - Path=/oauth/**
+
+
+      # 允许跨域
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedHeaders: "*"
+            allowedMethods: "*"
+            allowCredentials: true

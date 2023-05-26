@@ -12,9 +12,20 @@
     <artifactId>joygle-store-front-user</artifactId>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+
+    <dependencies>
+
+        <!-- 自身公共模块依赖 -->
+        <dependency>
+            <groupId>cn.edu.mju.joygle</groupId>
+            <artifactId>joygle-store-security</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+    </dependencies>
 </project>

@@ -1,4 +1,4 @@
-package cn.edu.mju.joygle.user.service;
+package cn.edu.mju.joygle.security.service;
 
 
 import cn.edu.mju.joygle.common.entity.StoreUser;

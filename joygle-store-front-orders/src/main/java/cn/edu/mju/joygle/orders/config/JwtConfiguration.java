@@ -1,4 +1,4 @@
-package cn.edu.mju.joygle.product.config;
+package cn.edu.mju.joygle.orders.config;
 
 
 import lombok.Setter;
@@ -16,7 +16,7 @@ import java.io.IOException;
 
 /**
  * ClassName: JwtConfiguration
- * Package: cn.edu.mju.joygle.product.config
+ * Package: cn.edu.mju.joygle.orders.config
  * Description: Jwt令牌配置类
  *
  * @Author:wjh

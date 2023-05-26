@@ -1,8 +1,8 @@
-package cn.edu.mju.joygle.user.service.impl;
+package cn.edu.mju.joygle.security.service.impl;
 
 import cn.edu.mju.joygle.common.entity.StoreUser;
-import cn.edu.mju.joygle.user.mapper.StoreUserMapper;
-import cn.edu.mju.joygle.user.service.StoreUserService;
+import cn.edu.mju.joygle.security.mapper.StoreUserMapper;
+import cn.edu.mju.joygle.security.service.StoreUserService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.Setter;

@@ -17,4 +17,32 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <dependencies>
+
+        <!-- nacos注册中心客户端依赖 -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+
+        <!-- 自身公共模块依赖 -->
+        <dependency>
+            <groupId>cn.edu.mju.joygle</groupId>
+            <artifactId>joygle-store-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <!-- 除掉Security安全框架(前后台的安全框架分开) -->
+            <exclusions>
+                <exclusion>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-starter-security</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+    </dependencies>
+
 </project>
