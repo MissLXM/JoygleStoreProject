@@ -4,6 +4,7 @@ import cn.edu.mju.joygle.common.core.domain.Result;
 import cn.edu.mju.joygle.common.entity.StoreUser;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 /**
  * ClassName: UserClient
@@ -21,5 +22,5 @@ public interface UserClient {
      * @return 用户
      */
     @GetMapping("/user/getStoreUser")
-    Result<StoreUser> getStoreUser();
+    Result<StoreUser> getStoreUser(@RequestHeader("Authorization") String authorization);
 }

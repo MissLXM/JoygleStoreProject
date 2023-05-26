@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Import;
  * @Create:2023-05-2023/5/21--18:56
  */
 @SpringBootApplication
-@EnableFeignClients
+@EnableFeignClients("cn.edu.mju.joygle.common")
 @Import({
         TokenAuthenticationEntryPoint.class
 })

@@ -1,15 +1,19 @@
 package cn.edu.mju.joygle.address.service.impl;
 
+import cn.edu.mju.joygle.address.dto.AddressDto;
+import cn.edu.mju.joygle.address.dto.UserAddressDto;
 import cn.edu.mju.joygle.address.mapper.AddressMapper;
 import cn.edu.mju.joygle.address.service.AddressService;
 import cn.edu.mju.joygle.common.core.domain.Result;
 import cn.edu.mju.joygle.common.entity.StoreUserAddress;
+import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -42,6 +46,66 @@ public class AddressServiceImpl implements AddressService {
         List<StoreUserAddress> storeUserAddresses = addressMapper.selectList(wrapper);
         // 打印信息
         log.info(storeUserAddresses.toString());
-        return Result.ok(storeUserAddresses).message("查询成功");
+        // 封装回显数据中的地址集合
+        List<AddressDto> addressDtos = new ArrayList<>();
+        storeUserAddresses.forEach(userAddress -> {
+            // 初始化地址回显
+            AddressDto addressDto = new AddressDto();
+            // 利用 hutool 工具包的深拷贝,拷贝对象
+            BeanUtil.copyProperties(userAddress,addressDto);
+            log.info(addressDto.toString());
+            // 添加到用户地址回显中
+            addressDtos.add(addressDto);
+        });
+        // 封装回显结果集
+        UserAddressDto userAddressDto = new UserAddressDto();
+        userAddressDto.setUserId(userId).setAddressList(addressDtos);
+        return Result.ok(userAddressDto).message("查询成功");
+    }
+
+    /**
+     * 保存用户地址信息
+     * @param userAddress 用户地址信息
+     * @return 结果集
+     */
+    @Override
+    public Result saveUserAddress(StoreUserAddress userAddress) {
+        // 调用保存地址
+        int rows = addressMapper.insert(userAddress);
+        // 判断是否保存成功
+        if (rows != 0) {
+            return Result.ok().message("地址保存成功");
+        }
+        return Result.fail().message("保存地址失败");
+    }
+
+    /**
+     * 修改用户地址信息
+     * @param userAddress 用户地址信息
+     * @return 结果集
+     */
+    @Override
+    public Result updateUserAddress(StoreUserAddress userAddress) {
+        // 调用修改地址
+        int rows = addressMapper.updateById(userAddress);
+        // 判断是否保存成功
+        if (rows != 0) {
+            return Result.ok().message("地址修改成功");
+        }
+        return Result.fail().message("地址修改失败");
+    }
+
+    /**
+     * 删除用户地址信息
+     * @param addressId 地址ID
+     * @return 结果集
+     */
+    @Override
+    public Result deleteUserAddress(Integer addressId) {
+        int rows = addressMapper.deleteById(addressId);
+        if (rows != 0) {
+            return Result.ok().message("地址删除成功");
+        }
+        return Result.fail().message("地址删除失败");
     }
 }
