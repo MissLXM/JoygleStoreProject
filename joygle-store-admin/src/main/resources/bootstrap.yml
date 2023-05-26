@@ -1,0 +1,10 @@
+server:
+  port: 8004
+spring:
+  application:
+    # 服务名称
+    name: address-service
+  cloud:
+    nacos:
+      # 注册中心地址
+      server-addr: 124.222.207.217:8848

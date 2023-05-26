@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    username: root
+    password: wjh520...
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:13306/joygle-store-db
+  jackson:
+    #时间格式
+    date-format: yyyy-MM-dd HH:mm:ss
+    #修改时区
+    time-zone: GMT+8
