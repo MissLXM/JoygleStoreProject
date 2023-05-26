@@ -53,7 +53,6 @@ public class ResourceServerAutoConfiguration extends ResourceServerConfigurerAda
                 // 所有请求都拦截
                 .authorizeRequests()
                 .antMatchers("/user/login/**","/user/register/**","/user/logout/**").permitAll()
-                .antMatchers("/user/test/**").permitAll()
                 .antMatchers("/**").authenticated()
                 .and()
                 .formLogin()
