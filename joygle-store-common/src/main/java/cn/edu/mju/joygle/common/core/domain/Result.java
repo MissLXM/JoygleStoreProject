@@ -1,4 +1,4 @@
-package cn.edu.mju.joygle.common.result;
+package cn.edu.mju.joygle.common.core.domain;
 
 import cn.edu.mju.joygle.common.enums.ResultCodeEnum;
 import lombok.Data;

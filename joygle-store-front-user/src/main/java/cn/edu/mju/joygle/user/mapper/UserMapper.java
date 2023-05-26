@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * ClassName: StoreUserMapper
+ * ClassName: UserMapper
  * Package: cn.edu.mju.joygle.user.mapper
  * Description:
  *
@@ -13,6 +13,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @Create:2023-05-2023/5/20--10:46
  */
 @Mapper
-public interface StoreUserMapper extends BaseMapper<StoreUser> {
+public interface UserMapper extends BaseMapper<StoreUser> {
 
 }

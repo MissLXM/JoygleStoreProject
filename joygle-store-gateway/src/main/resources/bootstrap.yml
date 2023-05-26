@@ -1,0 +1,20 @@
+server:
+  port: 8000
+  servlet:
+    context-path: /
+
+
+spring:
+  application:
+    # 程序名就是服务名
+    name: gateway-service
+
+
+  cloud:
+    # 注册中心地址
+    nacos:
+      config:
+        server-addr: 124.222.207.217:8848
+      discovery:
+        server-addr: 124.222.207.217:8848
+

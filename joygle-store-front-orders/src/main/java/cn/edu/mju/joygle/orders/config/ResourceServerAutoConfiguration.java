@@ -1,4 +1,4 @@
-package cn.edu.mju.joygle.product.config;
+package cn.edu.mju.joygle.orders.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -11,7 +11,7 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 
 /**
  * ClassName: ResourceServerAutoConfiguration
- * Package: cn.edu.mju.joygle.product.config
+ * Package: cn.edu.mju.joygle.orders.config
  * Description: 资源配置类
  *
  * @Author:wjh

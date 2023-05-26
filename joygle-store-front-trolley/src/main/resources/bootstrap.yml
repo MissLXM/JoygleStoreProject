@@ -1,10 +1,21 @@
 server:
-  port: 8003
+  port: 9007
 spring:
   application:
     # 服务名称
-    name: collection-service
+    name: trolley-service
   cloud:
+    # 注册中心地址
     nacos:
-      # 注册中心地址
-      server-addr: 124.222.207.217:8848
+      config:
+        server-addr: 124.222.207.217:8848
+        group: DEFAULT_GROUP
+        ext-config:
+          - data-id: default-dev.yml
+            refresh: true
+            group: DEFAULT_GROUP
+          - data-id: security-jwt.yml
+            refresh: true
+            group: DEFAULT_GROUP
+      discovery:
+        server-addr: 124.222.207.217:8848

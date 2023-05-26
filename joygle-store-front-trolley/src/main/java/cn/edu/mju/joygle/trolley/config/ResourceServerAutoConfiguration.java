@@ -1,4 +1,4 @@
-package cn.edu.mju.joygle.user.config;
+package cn.edu.mju.joygle.trolley.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -11,7 +11,7 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 
 /**
  * ClassName: ResourceServerAutoConfiguration
- * Package: cn.edu.mju.joygle.user.config
+ * Package: cn.edu.mju.joygle.trolley.config
  * Description: 资源配置类
  *
  * @Author:wjh

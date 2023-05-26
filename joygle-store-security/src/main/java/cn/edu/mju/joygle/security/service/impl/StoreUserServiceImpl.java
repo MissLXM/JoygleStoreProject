@@ -1,8 +1,8 @@
-package cn.edu.mju.joygle.user.service.impl;
+package cn.edu.mju.joygle.security.service.impl;
 
 import cn.edu.mju.joygle.common.entity.StoreUser;
-import cn.edu.mju.joygle.user.mapper.StoreUserMapper;
-import cn.edu.mju.joygle.user.service.StoreUserService;
+import cn.edu.mju.joygle.security.mapper.StoreUserMapper;
+import cn.edu.mju.joygle.security.service.StoreUserService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.Setter;
@@ -33,8 +33,7 @@ public class StoreUserServiceImpl extends ServiceImpl<StoreUserMapper, StoreUser
         // 初始化条件构造器
         LambdaQueryWrapper<StoreUser> wrapper = new LambdaQueryWrapper<>();
         // 设置条件
-        wrapper
-                .eq(StoreUser::getUsername,username);
+        wrapper.eq(StoreUser::getUsername,username);
         // 返回用户
         return mapper.selectOne(wrapper);
     }

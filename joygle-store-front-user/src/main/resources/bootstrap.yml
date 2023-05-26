@@ -1,0 +1,25 @@
+server:
+  port: 9001
+  # Header信息长度过长 或者 参数信息过长情况会报错 -- status 400
+  max-http-header-size: 20480
+
+spring:
+  application:
+    # 服务名称
+    name: user-service
+  cloud:
+    # 注册中心地址
+    nacos:
+      config:
+        server-addr: 124.222.207.217:8848
+        group: DEFAULT_GROUP
+        ext-config:
+          - data-id: default-dev.yml
+            refresh: true
+            group: DEFAULT_GROUP
+          - data-id: security-jwt.yml
+            refresh: true
+            group: DEFAULT_GROUP
+      discovery:
+        server-addr: 124.222.207.217:8848
+

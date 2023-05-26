@@ -1,4 +1,4 @@
-package cn.edu.mju.joygle.gateway.utils;
+package cn.edu.mju.joygle.common.utils;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
@@ -13,7 +13,7 @@ import java.util.UUID;
 
 /**
  * ClassName: JwtUtil
- * Package: cn.edu.mju.joygle.gateway.utils
+ * Package: cn.edu.mju.joygle.common.utils
  * Description: Jwt生成工具类
  *
  * @Author:wjh

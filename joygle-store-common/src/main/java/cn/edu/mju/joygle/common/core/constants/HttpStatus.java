@@ -1,14 +1,14 @@
-package cn.edu.mju.joygle.common.constants;
+package cn.edu.mju.joygle.common.core.constants;
 
 /**
- * ClassName: HttpStats
+ * ClassName: HttpStatus
  * Package: cn.edu.mju.joygle.common.constants
  * Description: 状态码常量
  *
  * @Author:wjh
  * @Create:2023-05-2023/5/22--9:32
  */
-public class HttpStats {
+public class HttpStatus {
 
     /**
      * 操作成功
@@ -29,4 +29,5 @@ public class HttpStats {
      * 系统内部错误
      */
     public static final int ERROR = 500;
+
 }

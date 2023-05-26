@@ -1,70 +1,73 @@
-package cn.edu.mju.joygle.user.cofig;
+package cn.edu.mju.joygle.user.config;
 
-import com.nimbusds.jose.jwk.JWKSet;
-import com.nimbusds.jose.jwk.RSAKey;
-import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
-import com.nimbusds.jose.jwk.source.JWKSource;
-import com.nimbusds.jose.proc.SecurityContext;
-import org.springframework.context.annotation.Bean;
+import cn.edu.mju.joygle.security.handler.LoginAuthenticationHandler;
+import cn.edu.mju.joygle.security.handler.TokenAuthenticationEntryPoint;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.oauth2.jwt.JwtDecoder;
-import org.springframework.security.oauth2.server.authorization.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration;
-import org.springframework.security.web.SecurityFilterChain;
-
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
-import java.security.interfaces.RSAPrivateKey;
-import java.security.interfaces.RSAPublicKey;
-import java.util.UUID;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
+import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
+import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.token.TokenStore;
 
 /**
  * ClassName: ResourceServerAutoConfiguration
- * Package: cn.edu.mju.joygle.user.cofig
+ * Package: cn.edu.mju.joygle.user.config
  * Description: 资源配置类
  *
  * @Author:wjh
  * @Create:2023-05-2023/5/23--21:57
  */
 @Configuration
-public class ResourceServerAutoConfiguration {
+// 开启资源服务
+@EnableResourceServer
+// 启动方法级别控制
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+public class ResourceServerAutoConfiguration extends ResourceServerConfigurerAdapter {
 
-    private static KeyPair generateRsaKey() {
-        KeyPair keyPair;
-        try {
-            KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
-            keyPairGenerator.initialize(2048);
-            keyPair = keyPairGenerator.generateKeyPair();
-        }
-        catch (Exception ex) {
-            throw new IllegalStateException(ex);
-        }
-        return keyPair;
+    /**
+     * 令牌持久化服务
+     */
+    @Autowired
+    private TokenStore tokenStore;
+
+    /**
+     * 登录处理器
+     */
+    @Autowired
+    private LoginAuthenticationHandler loginAuthenticationHandler;
+
+    /**
+     * token认证处理器
+     */
+    @Autowired
+    private TokenAuthenticationEntryPoint tokenAuthenticationEntryPoint;
+
+
+    @Override
+    public void configure(HttpSecurity http) throws Exception {
+        http
+                // 关闭CSRF服务
+                .csrf().disable()
+                // 所有请求都拦截
+                .authorizeRequests()
+                .antMatchers("/user/login/**","/user/register/**","/user/logout/**").permitAll()
+                .antMatchers("/user/test/**").permitAll()
+                .antMatchers("/**").authenticated()
+                .and()
+                .formLogin()
+                // 登录成功处理器
+                .successHandler(loginAuthenticationHandler)
+                // 登录失败处理器
+                .failureHandler(loginAuthenticationHandler);
     }
 
-    @Bean
-    public JWKSource<SecurityContext> jwkSource() {
-        KeyPair keyPair = generateRsaKey();
-        RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
-        RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
-        RSAKey rsaKey = new RSAKey.Builder(publicKey)
-                .privateKey(privateKey)
-                .keyID(UUID.randomUUID().toString())
-                .build();
-        JWKSet jwkSet = new JWKSet(rsaKey);
-        return new ImmutableJWKSet<>(jwkSet);
-    }
-
-    @Bean
-    public JwtDecoder jwtDecoder(JWKSource<SecurityContext> jwkSource) {
-        return OAuth2AuthorizationServerConfiguration.jwtDecoder(jwkSource);
-    }
-
-    @Bean
-    public SecurityFilterChain resourceServerSecurityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests().anyRequest().authenticated().and()
-                .oauth2ResourceServer().jwt();
-
-        return http.build();
+    @Override
+    public void configure(ResourceServerSecurityConfigurer resources)  {
+        // 设置令牌对象(Jwt令牌来验证并控制用户的访问)
+        resources.tokenStore(tokenStore)
+                // 检查 token 是否携带
+                .authenticationEntryPoint(tokenAuthenticationEntryPoint);
     }
 }

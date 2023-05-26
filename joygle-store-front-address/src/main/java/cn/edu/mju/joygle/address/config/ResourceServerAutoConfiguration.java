@@ -1,5 +1,8 @@
-package cn.edu.mju.joygle.carousel.config;
+package cn.edu.mju.joygle.address.config;
 
+
+import cn.edu.mju.joygle.security.handler.TokenAuthenticationEntryPoint;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -11,7 +14,7 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 
 /**
  * ClassName: ResourceServerAutoConfiguration
- * Package: cn.edu.mju.joygle.carousel.config
+ * Package: cn.edu.mju.joygle.address.config
  * Description: 资源配置类
  *
  * @Author:wjh
@@ -30,6 +33,12 @@ public class ResourceServerAutoConfiguration extends ResourceServerConfigurerAda
     @Autowired
     private TokenStore tokenStore;
 
+    /**
+     * token认证处理器
+     */
+    @Setter(onMethod_ = @Autowired)
+    private TokenAuthenticationEntryPoint tokenAuthenticationEntryPoint;
+
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http
@@ -37,12 +46,16 @@ public class ResourceServerAutoConfiguration extends ResourceServerConfigurerAda
                 .csrf().disable()
                 // 所有请求都拦截
                 .authorizeRequests()
-                .antMatchers("/**").authenticated();
+                .antMatchers("/**").authenticated()
+                .and()
+                .exceptionHandling();
     }
 
     @Override
-    public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
+    public void configure(ResourceServerSecurityConfigurer resources) {
         // 设置令牌对象(Jwt令牌来验证并控制用户的访问)
-        resources.tokenStore(tokenStore);
+        resources.tokenStore(tokenStore)
+                // token 是否携带
+                .authenticationEntryPoint(tokenAuthenticationEntryPoint);
     }
 }

@@ -1,6 +1,6 @@
-package cn.edu.mju.joygle.common.result;
+package cn.edu.mju.joygle.common.enums;
 
-import cn.edu.mju.joygle.common.constants.HttpStatus;
+import cn.edu.mju.joygle.common.core.constants.HttpStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
