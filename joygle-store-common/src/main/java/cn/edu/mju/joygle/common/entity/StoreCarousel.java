@@ -35,21 +35,18 @@ public class StoreCarousel implements Serializable {
     @Schema(name = "productId",description = "商品ID")
     private Integer productId;
 
-    @TableField("product_url")
-    @Schema(name = "productUrl",description = "跳转商品详情")
-    private String productUrl;
-
     @TableField("priority")
     @Schema(name = "priority",description = "显示优先级")
     private String priority;
 
     @TableField("create_time")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT-8")
     @Schema(name = "createTime",description = "创建时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT-8")
     private Date createTime;
 
     @TableField("update_time")
     @Schema(name = "updateTime",description = "更新时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT-8")
     private Date updateTime;
 
     @TableLogic

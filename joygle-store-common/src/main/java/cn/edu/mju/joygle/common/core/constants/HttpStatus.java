@@ -16,6 +16,11 @@ public class HttpStatus {
     public static final int SUCCESS = 200;
 
     /**
+     * 未找到数据
+     */
+    public static final int NO_FOUND = 201;
+
+    /**
      * 未授权
      */
     public static final int UNAUTHORIZED = 401;

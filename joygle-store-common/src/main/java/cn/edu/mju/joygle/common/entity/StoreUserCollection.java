@@ -39,7 +39,7 @@ public class StoreUserCollection implements Serializable {
     private Integer productId;
 
     @TableField("collection_time")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT-8")
     @Schema(name= "collectionTime",description = "收藏时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT-8")
     private Date collectionTime;
 }

@@ -32,7 +32,7 @@ public class TokenAuthenticationEntryPoint implements AuthenticationEntryPoint {
         response.setHeader("Content-Type", "application/json;charset=UTF-8");
 
         // 自定义结果集返回
-        Result result = Result.fail(false).message("token未携带").code(HttpStatus.UNAUTHORIZED.value());
+        Result result = Result.fail(false).message("token未携带或已过期").code(HttpStatus.UNAUTHORIZED.value());
         response.getWriter().write(JSONUtil.toJsonStr(result));
     }
 }

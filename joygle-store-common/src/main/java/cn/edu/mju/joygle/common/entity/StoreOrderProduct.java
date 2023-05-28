@@ -44,12 +44,13 @@ public class StoreOrderProduct implements Serializable {
     private Double productPrice;
 
     @TableField("create_time")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT-8")
     @Schema(name = "createTime",description = "创建时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT-8")
     private Date createTime;
 
     @TableField("update_time")
     @Schema(name = "updateTime",description = "更新时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT-8")
     private Date updateTime;
 
     @TableLogic

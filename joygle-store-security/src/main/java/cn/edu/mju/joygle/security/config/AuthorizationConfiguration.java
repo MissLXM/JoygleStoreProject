@@ -97,7 +97,7 @@ public class AuthorizationConfiguration extends AuthorizationServerConfigurerAda
      * @return
      */
     private ResponseEntity handleException(Exception e) {
-        return new ResponseEntity<>(Result.fail(), HttpStatus.FOUND);
+        return new ResponseEntity<>(Result.fail().message("token失效"), HttpStatus.FOUND);
     }
 
 

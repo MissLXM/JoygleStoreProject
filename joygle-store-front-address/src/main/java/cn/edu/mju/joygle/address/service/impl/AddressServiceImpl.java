@@ -4,6 +4,7 @@ import cn.edu.mju.joygle.address.dto.AddressDto;
 import cn.edu.mju.joygle.address.dto.UserAddressDto;
 import cn.edu.mju.joygle.address.mapper.AddressMapper;
 import cn.edu.mju.joygle.address.service.AddressService;
+import cn.edu.mju.joygle.common.core.constants.HttpStatus;
 import cn.edu.mju.joygle.common.core.domain.Result;
 import cn.edu.mju.joygle.common.entity.StoreUserAddress;
 import cn.hutool.core.bean.BeanUtil;
@@ -46,6 +47,10 @@ public class AddressServiceImpl implements AddressService {
         List<StoreUserAddress> storeUserAddresses = addressMapper.selectList(wrapper);
         // 打印信息
         log.info(storeUserAddresses.toString());
+        // 判空
+        if (storeUserAddresses.size() == 0) {
+            return Result.fail().message("暂无地址信息").code(HttpStatus.NO_FOUND);
+        }
         // 封装回显数据中的地址集合
         List<AddressDto> addressDtos = new ArrayList<>();
         storeUserAddresses.forEach(userAddress -> {

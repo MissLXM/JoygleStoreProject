@@ -4,12 +4,12 @@ import cn.edu.mju.joygle.address.service.AddressService;
 import cn.edu.mju.joygle.common.client.user.UserClient;
 import cn.edu.mju.joygle.common.core.domain.Result;
 import cn.edu.mju.joygle.common.entity.StoreUserAddress;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.websocket.server.PathParam;
 
 /**
  * ClassName: AddressController
@@ -22,6 +22,7 @@ import javax.websocket.server.PathParam;
 @Slf4j
 @RestController
 @RequestMapping("/address")
+@Tag(name = "AddressController", description = "用户地址控制层")
 public class AddressController {
 
     @Setter(onMethod_ = @Autowired)
@@ -31,6 +32,7 @@ public class AddressController {
     private AddressService addressService;
 
     @GetMapping("/showUserAddress")
+    @Tag(name = "showUserAddress", description = "展示该用户所有地址")
     public Result showUserAddress(@RequestHeader("Authorization") String authorization) {
         if (authorization != null) {
             // 通过 Feign 获取用户ID
@@ -42,6 +44,7 @@ public class AddressController {
     }
 
     @PostMapping("/saveUserAddress")
+    @Tag(name = "saveUserAddress", description = "用户保存地址")
     public Result saveUserAddress(@RequestHeader("Authorization") String authorization, @RequestBody StoreUserAddress userAddress) {
         if (authorization != null) {
             // 通过 Feign 获取用户ID
@@ -55,6 +58,7 @@ public class AddressController {
     }
 
     @PutMapping("/updateUserAddress")
+    @Tag(name = "updateUserAddress", description = "用户修改地址")
     public Result updateUserAddress(@RequestHeader("Authorization") String authorization, @RequestBody StoreUserAddress userAddress) {
         if (authorization != null) {
             // 返回是否修改成功
@@ -63,8 +67,9 @@ public class AddressController {
         return Result.fail().message("修改地址失败");
     }
 
-    @DeleteMapping("/deleteUserAddress")
-    public Result deleteUserAddress(@RequestHeader("Authorization") String authorization, @PathParam("addressId") Integer addressId) {
+    @DeleteMapping("/deleteUserAddress/{addressId}")
+    @Tag(name = "deleteUserAddress", description = "用户删除地址")
+    public Result deleteUserAddress(@RequestHeader("Authorization") String authorization, @PathVariable("addressId") Integer addressId) {
         if (authorization != null) {
             // 返回是否删除成功
             return addressService.deleteUserAddress(addressId);
