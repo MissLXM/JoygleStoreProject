@@ -1,12 +1,12 @@
 package cn.edu.mju.joygle.address.service.impl;
 
-import cn.edu.mju.joygle.address.dto.AddressDto;
-import cn.edu.mju.joygle.address.dto.UserAddressDto;
+import cn.edu.mju.joygle.common.entity.dto.address.AddressDto;
+import cn.edu.mju.joygle.common.entity.dto.address.UserAddressDto;
 import cn.edu.mju.joygle.address.mapper.AddressMapper;
 import cn.edu.mju.joygle.address.service.AddressService;
 import cn.edu.mju.joygle.common.core.constants.HttpStatus;
 import cn.edu.mju.joygle.common.core.domain.Result;
-import cn.edu.mju.joygle.common.entity.StoreUserAddress;
+import cn.edu.mju.joygle.common.entity.pojo.StoreUserAddress;
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import lombok.Setter;
@@ -31,6 +31,24 @@ public class AddressServiceImpl implements AddressService {
 
     @Setter(onMethod_ = @Autowired)
     private AddressMapper addressMapper;
+
+    /**
+     * 根据地址ID查询地址信息
+     * @param addressId 地址ID
+     * @return 结果集
+     */
+    @Override
+    public Result showUserAddressByAddressId(Integer addressId) {
+        // 查询地址信息
+        StoreUserAddress storeUserAddress = addressMapper.selectById(addressId);
+
+        // 判空
+        if (storeUserAddress == null) {
+            return Result.fail().message("查无此地址");
+        }
+
+        return Result.ok(storeUserAddress.getAddress()).message("查询地址成功");
+    }
 
     /**
      * 展示用户的所有地址信息

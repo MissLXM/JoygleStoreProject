@@ -1,6 +1,6 @@
 package cn.edu.mju.joygle.address.mapper;
 
-import cn.edu.mju.joygle.common.entity.StoreUserAddress;
+import cn.edu.mju.joygle.common.entity.pojo.StoreUserAddress;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 

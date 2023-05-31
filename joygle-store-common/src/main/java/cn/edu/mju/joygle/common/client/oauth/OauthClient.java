@@ -1,7 +1,7 @@
 package cn.edu.mju.joygle.common.client.oauth;
 
 import cn.edu.mju.joygle.common.core.domain.Result;
-import cn.edu.mju.joygle.common.param.LoginUserParam;
+import cn.edu.mju.joygle.common.entity.param.oauth.LoginUserParam;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,14 +20,17 @@ import org.springframework.web.bind.annotation.RequestHeader;
 public interface OauthClient {
 
     /**
-     * 登录
+     * 登录接口
+     * @param authorization 认证信息
+     * @param loginUserParam 登录参数
      * @return 结果集
      */
     @PostMapping("/oauth/login")
     Result login(@RequestHeader("Authorization") String authorization,@RequestBody LoginUserParam loginUserParam);
 
     /**
-     * 登出
+     * 登出接口
+     * @param authorization 认证信息
      * @return 结果集
      */
     @GetMapping("/oauth/logout")

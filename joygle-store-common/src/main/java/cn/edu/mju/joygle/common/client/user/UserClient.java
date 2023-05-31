@@ -1,7 +1,7 @@
 package cn.edu.mju.joygle.common.client.user;
 
 import cn.edu.mju.joygle.common.core.domain.Result;
-import cn.edu.mju.joygle.common.entity.StoreUser;
+import cn.edu.mju.joygle.common.entity.pojo.StoreUser;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -18,8 +18,9 @@ import org.springframework.web.bind.annotation.RequestHeader;
 public interface UserClient {
 
     /**
-     * 当前用户信息
-     * @return 用户
+     * 当前用户
+     * @param authorization 认证信息
+     * @return 结果集
      */
     @GetMapping("/user/getStoreUser")
     Result<StoreUser> getStoreUser(@RequestHeader("Authorization") String authorization);

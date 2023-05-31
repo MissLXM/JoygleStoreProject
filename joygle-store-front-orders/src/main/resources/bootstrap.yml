@@ -4,6 +4,16 @@ spring:
   application:
     # 服务名称
     name: orders-service
+  # RabbitMQ配置
+  rabbitmq:
+    addresses: 8.130.77.74:5672
+    username: root
+    password: 123456
+    virtual-host: /
+    listener:
+      simple:
+        # 每次只能获取一条消息，处理完成才能获取下一个消息
+        prefetch: 1
   cloud:
     # 注册中心地址
     nacos:

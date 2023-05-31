@@ -1,7 +1,7 @@
 package cn.edu.mju.joygle.address.service;
 
 import cn.edu.mju.joygle.common.core.domain.Result;
-import cn.edu.mju.joygle.common.entity.StoreUserAddress;
+import cn.edu.mju.joygle.common.entity.pojo.StoreUserAddress;
 
 /**
  * ClassName: AddressService
@@ -12,6 +12,13 @@ import cn.edu.mju.joygle.common.entity.StoreUserAddress;
  * @Create:2023-05-2023/5/26--14:11
  */
 public interface AddressService {
+
+    /**
+     * 根据地址ID查询地址信息
+     * @param addressId 地址ID
+     * @return 结果集
+     */
+    Result showUserAddressByAddressId(Integer addressId);
 
     /**
      * 展示用户的所有地址信息
@@ -40,4 +47,5 @@ public interface AddressService {
      * @return 结果集
      */
     Result deleteUserAddress(Integer addressId);
+
 }

@@ -1,7 +1,7 @@
 package cn.edu.mju.joygle.security;
 
 
-import cn.edu.mju.joygle.common.param.LoginUserParam;
+import cn.edu.mju.joygle.common.entity.param.oauth.LoginUserParam;
 import org.junit.jupiter.api.Test;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

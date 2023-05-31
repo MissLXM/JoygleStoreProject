@@ -2,8 +2,8 @@ package cn.edu.mju.joygle.user.controller;
 
 import cn.edu.mju.joygle.common.client.oauth.OauthClient;
 import cn.edu.mju.joygle.common.core.domain.Result;
-import cn.edu.mju.joygle.common.entity.StoreUser;
-import cn.edu.mju.joygle.common.param.LoginUserParam;
+import cn.edu.mju.joygle.common.entity.pojo.StoreUser;
+import cn.edu.mju.joygle.common.entity.param.oauth.LoginUserParam;
 import cn.edu.mju.joygle.user.service.UserService;
 import com.alibaba.fastjson.JSON;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -16,6 +16,7 @@ import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.security.Principal;
 
@@ -30,7 +31,7 @@ import java.security.Principal;
 @Slf4j
 @RestController
 @RequestMapping("/user")
-@Tag(name = "UserController",description = "用户服务")
+@Tag(name = "UserController", description = "用户服务")
 public class UserController {
 
     @Autowired
@@ -40,11 +41,11 @@ public class UserController {
     private UserService service;
 
     @GetMapping("/getStoreUser")
-    @Tag(name = "getStoreUser",description = "当前用户信息")
+    @Tag(name = "getStoreUser", description = "当前用户信息")
     public Result<StoreUser> getStoreUser(OAuth2Authentication oAuth2Authentication, Principal principal, Authentication authentication) {
-        log.info("用户的角色有:{}",oAuth2Authentication.getUserAuthentication().getAuthorities().toString());
-        log.info("用户的名称为:{}",principal.getName());
-        log.info("用户的角色有:{}",authentication.getAuthorities().toString());
+        log.info("用户的角色有:{}", oAuth2Authentication.getUserAuthentication().getAuthorities().toString());
+        log.info("用户的名称为:{}", principal.getName());
+        log.info("用户的角色有:{}", authentication.getAuthorities().toString());
 
         StoreUser user = service.usernameCheck(principal.getName()).getData();
         // 设置密码为空
@@ -53,10 +54,10 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    @Tag(name = "login",description = "用户登录")
-    public Result login(@RequestHeader("Authorization") String authorization,@RequestBody LoginUserParam loginUserParam) {
-        log.info("UserController.login业务结束,用户信息:{}",JSON.toJSONString(loginUserParam));
-         return oauthClient.login(authorization,loginUserParam);
+    @Tag(name = "login", description = "用户登录")
+    public Result login(@RequestHeader("Authorization") String authorization, @RequestBody LoginUserParam loginUserParam) {
+        log.info("UserController.login业务结束,用户信息:{}", JSON.toJSONString(loginUserParam));
+        return oauthClient.login(authorization, loginUserParam);
     }
 
     @PostMapping("/register")
@@ -68,16 +69,16 @@ public class UserController {
         }
         // 2.判断数据库中是否有相同的登录名称
         if (service.usernameAndOtherCheck(
-                 user.getUsername()
-                ,user.getUserEmail()
-                ,user.getUserPhone()).size() != 0 ) {
+                user.getUsername()
+                , user.getUserEmail()
+                , user.getUserPhone()).size() != 0) {
             return Result.fail().message("用户已存在");
         }
         // 3.密码加密
         String newPwd = new BCryptPasswordEncoder().encode(user.getPassword());
         user.setPassword(newPwd);
         // 4.判断是否注册成功
-        if( !service.save(user)) {
+        if (!service.save(user)) {
             return Result.fail().message("注册失败");
         }
         return Result.ok().message("注册成功");
@@ -97,7 +98,7 @@ public class UserController {
         user.setPassword(newPwd);
 
         // 3.判断是否修改成功
-        if( !service.updateById(user)) {
+        if (!service.updateById(user)) {
             return Result.fail().message("修改失败");
         }
 
@@ -108,6 +109,19 @@ public class UserController {
     @Tag(name = "logout", description = "用户登出")
     public Result logout(@RequestHeader("Authorization") String authorization) {
         return oauthClient.logout(authorization);
+    }
+
+
+    @PutMapping("/updateUserAvatar")
+    @Tag(name = "updateUserAvatar", description = "用户头像修改")
+    public Result updateUserAvatar(@RequestPart("avatar") MultipartFile avatarFile, Principal principal) {
+
+        if (principal != null) {
+            // 获取用户ID
+            Integer userId = service.usernameCheck(principal.getName()).getData().getUserId();
+            return service.updateUserAvatar(userId, avatarFile);
+        }
+        return Result.ok().message("用户头像修改成功");
     }
 
 }

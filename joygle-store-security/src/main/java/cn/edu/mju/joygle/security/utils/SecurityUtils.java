@@ -1,7 +1,7 @@
 package cn.edu.mju.joygle.security.utils;
 
 //import cn.edu.mju.joygle.common.constants.HttpStatus;
-//import cn.edu.mju.joygle.common.entity.StoreUser;
+//import cn.edu.mju.joygle.common.entity.pojo.StoreUser;
 //import cn.edu.mju.joygle.common.exception.ServiceException;
 //import org.springframework.http.HttpStatus;
 //import org.springframework.security.core.Authentication;

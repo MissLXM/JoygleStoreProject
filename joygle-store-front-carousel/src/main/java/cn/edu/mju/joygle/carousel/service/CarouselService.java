@@ -17,4 +17,12 @@ public interface CarouselService {
      * @return 结果集
      */
     Result defaultShow();
+
+    /**
+     * 通过轮播图ID跳转商品详细信息
+     * @param authorization 认证信息
+     * @param categoryId 轮播图ID
+     * @return 结果集
+     */
+    Result skipProductInfo(String authorization, Integer categoryId);
 }

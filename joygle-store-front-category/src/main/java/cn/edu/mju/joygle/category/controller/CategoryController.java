@@ -26,6 +26,7 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @GetMapping("/oneLevelCategoryShow")
+    @Tag(name = "oneLevelCategoryShow", description = "展示所有一级类别")
     public Result oneLevelCategoryShow(@RequestHeader("Authorization") String authorization) {
         if (authorization != null) {
             return categoryService.oneLevelCategoryShow();
@@ -34,6 +35,7 @@ public class CategoryController {
     }
 
     @GetMapping("/twoLevelCategoryShow/{categoryParentId}")
+    @Tag(name = "twoLevelCategoryShow", description = "根据一级类别ID查询二级类别")
     public Result twoLevelCategoryShow(@RequestHeader("Authorization") String authorization, @PathVariable("categoryParentId") Integer categoryParentId) {
         if (authorization != null) {
             return categoryService.twoLevelCategoryShow(categoryParentId);

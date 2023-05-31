@@ -1,6 +1,6 @@
 package cn.edu.mju.joygle.collection.mapper;
 
-import cn.edu.mju.joygle.common.entity.StoreUserCollection;
+import cn.edu.mju.joygle.common.entity.pojo.StoreUserCollection;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 

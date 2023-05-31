@@ -3,18 +3,20 @@ server:
   servlet:
     context-path: /
 
-
 spring:
   application:
     # 程序名就是服务名
     name: gateway-service
-
-
   cloud:
     # 注册中心地址
     nacos:
       config:
         server-addr: 124.222.207.217:8848
+        group: DEFAULT_GROUP
+        ext-config:
+          - data-id: gateway-dev.yml
+            refresh: true
+            group: DEFAULT_GROUP
       discovery:
         server-addr: 124.222.207.217:8848
 

@@ -1,5 +1,6 @@
 package cn.edu.mju.joygle.product;
 
+import cn.edu.mju.joygle.common.config.MybatisPlusConfiguration;
 import cn.edu.mju.joygle.security.handler.TokenAuthenticationEntryPoint;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,7 +18,8 @@ import org.springframework.context.annotation.Import;
 @SpringBootApplication
 @EnableFeignClients("cn.edu.mju.joygle.common")
 @Import({
-        TokenAuthenticationEntryPoint.class
+        TokenAuthenticationEntryPoint.class,
+        MybatisPlusConfiguration.class
 })
 public class ProductApplication {
     public static void main(String[] args) {

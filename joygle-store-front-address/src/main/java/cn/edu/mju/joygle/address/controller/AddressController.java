@@ -3,7 +3,7 @@ package cn.edu.mju.joygle.address.controller;
 import cn.edu.mju.joygle.address.service.AddressService;
 import cn.edu.mju.joygle.common.client.user.UserClient;
 import cn.edu.mju.joygle.common.core.domain.Result;
-import cn.edu.mju.joygle.common.entity.StoreUserAddress;
+import cn.edu.mju.joygle.common.entity.pojo.StoreUserAddress;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +30,18 @@ public class AddressController {
 
     @Setter(onMethod_ = @Autowired)
     private AddressService addressService;
+
+    @GetMapping("/showUserAddressByAddressId/{addressId}")
+    @Tag(name = "showUserAddressByAddressId", description = "查询地址")
+    public Result showUserAddressByAddressId(
+            @RequestHeader("Authorization") String authorization,
+            @PathVariable Integer addressId) {
+        if (authorization != null) {
+            // 返回用户地址
+            return addressService.showUserAddressByAddressId(addressId);
+        }
+        return Result.fail().message("请求头未携带Authorization");
+    }
 
     @GetMapping("/showUserAddress")
     @Tag(name = "showUserAddress", description = "展示该用户所有地址")
@@ -76,4 +88,5 @@ public class AddressController {
         }
         return Result.fail().message("删除地址失败");
     }
+
 }

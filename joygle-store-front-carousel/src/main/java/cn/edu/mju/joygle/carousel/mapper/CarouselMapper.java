@@ -1,6 +1,6 @@
 package cn.edu.mju.joygle.carousel.mapper;
 
-import cn.edu.mju.joygle.common.entity.StoreCarousel;
+import cn.edu.mju.joygle.common.entity.pojo.StoreCarousel;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 

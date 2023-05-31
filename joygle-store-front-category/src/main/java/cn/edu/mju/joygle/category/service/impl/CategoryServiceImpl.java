@@ -1,11 +1,11 @@
 package cn.edu.mju.joygle.category.service.impl;
 
-import cn.edu.mju.joygle.category.dto.CategoryDto;
+import cn.edu.mju.joygle.common.entity.dto.category.CategoryDto;
 import cn.edu.mju.joygle.category.mapper.CategoryMapper;
 import cn.edu.mju.joygle.category.service.CategoryService;
 import cn.edu.mju.joygle.common.core.constants.HttpStatus;
 import cn.edu.mju.joygle.common.core.domain.Result;
-import cn.edu.mju.joygle.common.entity.StoreCategory;
+import cn.edu.mju.joygle.common.entity.pojo.StoreCategory;
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import lombok.Setter;

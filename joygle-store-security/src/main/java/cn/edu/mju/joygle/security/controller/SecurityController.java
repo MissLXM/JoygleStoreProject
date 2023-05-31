@@ -1,7 +1,7 @@
 package cn.edu.mju.joygle.security.controller;
 
 import cn.edu.mju.joygle.common.core.domain.Result;
-import cn.edu.mju.joygle.common.param.LoginUserParam;
+import cn.edu.mju.joygle.common.entity.param.oauth.LoginUserParam;
 import cn.edu.mju.joygle.security.dto.LoginUserDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

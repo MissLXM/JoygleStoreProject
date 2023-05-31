@@ -1,5 +1,7 @@
 package cn.edu.mju.joygle.trolley.config;
 
+import cn.edu.mju.joygle.security.handler.TokenAuthenticationEntryPoint;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -30,6 +32,12 @@ public class ResourceServerAutoConfiguration extends ResourceServerConfigurerAda
     @Autowired
     private TokenStore tokenStore;
 
+    /**
+     * token认证处理器
+     */
+    @Setter(onMethod_ = @Autowired)
+    private TokenAuthenticationEntryPoint tokenAuthenticationEntryPoint;
+
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http
@@ -41,8 +49,10 @@ public class ResourceServerAutoConfiguration extends ResourceServerConfigurerAda
     }
 
     @Override
-    public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
+    public void configure(ResourceServerSecurityConfigurer resources)  {
         // 设置令牌对象(Jwt令牌来验证并控制用户的访问)
-        resources.tokenStore(tokenStore);
+        resources.tokenStore(tokenStore)
+                // token 是否携带
+                .authenticationEntryPoint(tokenAuthenticationEntryPoint);
     }
 }

@@ -2,8 +2,9 @@ package cn.edu.mju.joygle.user.service;
 
 
 import cn.edu.mju.joygle.common.core.domain.Result;
-import cn.edu.mju.joygle.common.entity.StoreUser;
+import cn.edu.mju.joygle.common.entity.pojo.StoreUser;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -32,4 +33,12 @@ public interface UserService extends IService<StoreUser> {
      * @return
      */
     List<StoreUser> usernameAndOtherCheck(String username,String email,String phone);
+
+    /**
+     * 更新头像
+     * @param userId 用户ID
+     * @param avatarFile 头像文件
+     * @return 结果集
+     */
+    Result updateUserAvatar(Integer userId, MultipartFile avatarFile);
 }

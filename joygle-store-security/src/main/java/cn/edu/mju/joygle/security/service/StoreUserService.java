@@ -1,7 +1,7 @@
 package cn.edu.mju.joygle.security.service;
 
 
-import cn.edu.mju.joygle.common.entity.StoreUser;
+import cn.edu.mju.joygle.common.entity.pojo.StoreUser;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

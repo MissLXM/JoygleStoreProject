@@ -19,6 +19,12 @@
 
     <dependencies>
 
+        <!-- rabbitMQ依赖 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+
         <!-- 自身公共模块依赖 -->
         <dependency>
             <groupId>cn.edu.mju.joygle</groupId>

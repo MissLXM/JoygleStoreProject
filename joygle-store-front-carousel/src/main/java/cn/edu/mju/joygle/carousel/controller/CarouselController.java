@@ -6,10 +6,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * ClassName: CarouselController
@@ -37,4 +34,13 @@ public class CarouselController {
         return Result.fail().message("token为空或过期");
     }
 
+
+    @GetMapping("/skipProductInfo/{categoryId}")
+    @Tag(name = "skipProductInfo", description = "轮播图跳转商品详情")
+    public Result skipProductInfo(@RequestHeader("Authorization") String authorization, @PathVariable Integer categoryId) {
+        if (authorization != null) {
+            return carouselService.skipProductInfo(authorization,categoryId);
+        }
+        return Result.fail().message("token为空或过期");
+    }
 }

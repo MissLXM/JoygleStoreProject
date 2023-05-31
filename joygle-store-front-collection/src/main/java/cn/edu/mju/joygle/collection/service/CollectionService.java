@@ -17,7 +17,7 @@ public interface CollectionService {
      * @param userId 根据用户ID
      * @return 结果集
      */
-    Result showUserCollection(Integer userId);
+    Result showUserCollection(String authorization,Integer userId,Integer currentPage,Integer pageSize);
 
     /**
      * 保存到用户收藏
@@ -29,8 +29,9 @@ public interface CollectionService {
 
     /**
      * 删除用户收藏
-     * @param collectionId 收藏ID
+     * @param userId    用户ID
+     * @param productId 商品ID
      * @return 结果集
      */
-    Result deleteUserCollection(Integer collectionId);
+    Result deleteUserCollection(Integer userId, Integer productId);
 }

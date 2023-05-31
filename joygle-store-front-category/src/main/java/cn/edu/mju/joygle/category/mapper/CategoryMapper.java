@@ -1,6 +1,6 @@
 package cn.edu.mju.joygle.category.mapper;
 
-import cn.edu.mju.joygle.common.entity.StoreCategory;
+import cn.edu.mju.joygle.common.entity.pojo.StoreCategory;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
