@@ -125,11 +125,15 @@
                 <nacos.group>DEFAULT_GROUP</nacos.group>
                 <nacos.refresh.true>true</nacos.refresh.true>
                 <nacos.refresh.false>false</nacos.refresh.false>
-                <nacos.default.dataId>default_dev.yml</nacos.default.dataId>
-                <nacos.security.dataId>security_jwt.yml</nacos.security.dataId>
+                <nacos.static.dataId>static-dev.yml</nacos.static.dataId>
+                <nacos.gateway.dataId>gateway-dev.yml</nacos.gateway.dataId>
+                <nacos.default.dataId>default-dev.yml</nacos.default.dataId>
+                <nacos.security.dataId>security-jwt.yml</nacos.security.dataId>
+                <nacos.rabbit.dataId>rabbit-mq-dev.yml</nacos.rabbit.dataId>
             </properties>
         </profile>
     </profiles>
+
 
     <build>
         <plugins>
@@ -137,43 +141,39 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
+                    <!-- 热部署所设置的配置 -->
                     <fork>true</fork>
                     <addResources>true</addResources>
                 </configuration>
             </plugin>
         </plugins>
-    </build>
 
-    <!--
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <configuration>
-                    <delimiters>@</delimiters>
-                    <useDefaultDelimiters>false</useDefaultDelimiters>
-                </configuration>
-            </plugin>
-        </plugins>
         <resources>
             <resource>
+                <!-- 指定文件路径 -->
                 <directory>src/main/resources</directory>
                 <filtering>true</filtering>
                 <includes>
+                    <!-- **表示任意级目录，*表示任意文件 -->
+                    <include>**/*</include>
+                </includes>
+                <excludes>
+                    <exclude>**/*.jks</exclude>
+                    <exclude>**/*.key</exclude>
+                </excludes>
+            </resource>
+            <resource>
+                <!-- 指定文件路径 -->
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+                <includes>
                     <include>**/*.jks</include>
-                    <include>**/*.yaml</include>
                     <include>**/*.key</include>
-                    <include>**/*.yml</include>
                 </includes>
             </resource>
         </resources>
     </build>
-    -->
+
 
 
 </project>

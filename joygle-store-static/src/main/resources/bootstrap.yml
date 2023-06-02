@@ -8,11 +8,11 @@ spring:
     # 注册中心地址
     nacos:
       config:
-        server-addr: 124.222.207.217:8848
-        group: DEFAULT_GROUP
+        server-addr: @nacos.server@
+        group: @nacos.group@
         ext-config:
-          - data-id: static-dev.yml
-            refresh: true
-            group: DEFAULT_GROUP
+          - data-id: @nacos.static.dataId@
+            refresh: @nacos.refresh.true@
+            group: @nacos.group@
       discovery:
-        server-addr: 124.222.207.217:8848
+        server-addr: @nacos.server@

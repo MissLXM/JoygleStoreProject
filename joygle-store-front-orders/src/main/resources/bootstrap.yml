@@ -4,28 +4,21 @@ spring:
   application:
     # 服务名称
     name: orders-service
-  # RabbitMQ配置
-  rabbitmq:
-    addresses: 8.130.77.74:5672
-    username: root
-    password: 123456
-    virtual-host: /
-    listener:
-      simple:
-        # 每次只能获取一条消息，处理完成才能获取下一个消息
-        prefetch: 1
   cloud:
     # 注册中心地址
     nacos:
       config:
-        server-addr: 124.222.207.217:8848
-        group: DEFAULT_GROUP
+        server-addr: @nacos.server@
+        group: @nacos.group@
         ext-config:
-          - data-id: default-dev.yml
-            refresh: true
-            group: DEFAULT_GROUP
-          - data-id: security-jwt.yml
-            refresh: true
-            group: DEFAULT_GROUP
+          - data-id: @nacos.default.dataId@
+            refresh: @nacos.refresh.true@
+            group: @nacos.group@
+          - data-id: @nacos.rabbit.dataId@
+            refresh: @nacos.refresh.true@
+            group: @nacos.group@
+          - data-id: @nacos.security.dataId@
+            refresh: @nacos.refresh.true@
+            group: @nacos.group@
       discovery:
-        server-addr: 124.222.207.217:8848
+        server-addr: @nacos.server@
