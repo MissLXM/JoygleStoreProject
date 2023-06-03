@@ -125,6 +125,7 @@
                 <nacos.group>DEFAULT_GROUP</nacos.group>
                 <nacos.refresh.true>true</nacos.refresh.true>
                 <nacos.refresh.false>false</nacos.refresh.false>
+                <nacos.redis.dataId>redis-dev.yml</nacos.redis.dataId>
                 <nacos.static.dataId>static-dev.yml</nacos.static.dataId>
                 <nacos.gateway.dataId>gateway-dev.yml</nacos.gateway.dataId>
                 <nacos.default.dataId>default-dev.yml</nacos.default.dataId>

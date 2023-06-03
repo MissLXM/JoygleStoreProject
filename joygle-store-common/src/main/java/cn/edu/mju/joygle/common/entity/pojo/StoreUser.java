@@ -57,7 +57,7 @@ public class StoreUser implements Serializable {
 
     @TableField("user_avatar")
     @Schema(name= "userAvatar",description = "用户头像")
-    private String userAvatar;
+    private String userAvatar = "public/imgs/avatar/1.jpg";
 
     @TableField("user_role")
     @Schema(name= "user_role",description = "用户角色")

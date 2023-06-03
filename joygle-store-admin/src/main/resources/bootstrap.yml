@@ -1,5 +1,5 @@
 server:
-  port: 9010
+  port: 10000
 spring:
   application:
     # 服务名称
@@ -12,6 +12,9 @@ spring:
         group: @nacos.group@
         ext-config:
           - data-id: @nacos.default.dataId@
+            refresh: @nacos.refresh.true@
+            group: @nacos.group@
+          - data-id: @nacos.redis.dataId@
             refresh: @nacos.refresh.true@
             group: @nacos.group@
       discovery:
