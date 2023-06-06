@@ -22,4 +22,9 @@ spring:
             group: @nacos.group@
       discovery:
         server-addr: @nacos.server@
-
+feign:
+  client:
+    config:
+      default:
+        connect-timeout: 10000
+        read-timeout: 10000
