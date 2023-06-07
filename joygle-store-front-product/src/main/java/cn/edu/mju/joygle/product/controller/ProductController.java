@@ -30,15 +30,11 @@ public class ProductController {
 
     @GetMapping("/hotProductShow/{currentPage}/{pageSize}")
     @Tag(name = "hotProductShow", description = "首页热门商品展示")
-    public Result hotProductShow(@RequestHeader("Authorization") String authorization, @PathVariable Integer currentPage, @PathVariable Integer pageSize) {
+    public Result hotProductShow(@PathVariable Integer currentPage, @PathVariable Integer pageSize) {
         // 如果前端没有传入当前页码和页面显示数量,默认为1、20
         if (currentPage == 0){ currentPage = Constants.CURRENT_PAGE;}
         if (pageSize == 0){ pageSize = Constants.PAGE_SIZE;}
-
-        if (authorization != null) {
-            return productService.hotProductShow(currentPage, pageSize);
-        }
-        return Result.fail().message("token未携带或已过期");
+        return productService.hotProductShow(currentPage, pageSize);
     }
 
 

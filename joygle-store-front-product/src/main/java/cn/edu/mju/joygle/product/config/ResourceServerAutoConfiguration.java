@@ -43,8 +43,10 @@ public class ResourceServerAutoConfiguration extends ResourceServerConfigurerAda
         http
                 // 关闭CSRF服务
                 .csrf().disable()
-                // 所有请求都拦截
                 .authorizeRequests()
+                // 首页热门商品方向
+                .antMatchers("/product/hotProductShow/**").permitAll()
+                // 所有请求都拦截
                 .antMatchers("/**").authenticated();
     }
 

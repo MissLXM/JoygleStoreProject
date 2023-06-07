@@ -27,11 +27,8 @@ public class CarouselController {
 
     @GetMapping("/defaultShow")
     @Tag(name = "defaultShow", description = "轮播图默认展示(6张)")
-    public Result defaultShow(@RequestHeader("Authorization") String authorization) {
-        if (authorization != null) {
-            return carouselService.defaultShow();
-        }
-        return Result.fail().message("token为空或过期");
+    public Result defaultShow() {
+        return carouselService.defaultShow();
     }
 
 
