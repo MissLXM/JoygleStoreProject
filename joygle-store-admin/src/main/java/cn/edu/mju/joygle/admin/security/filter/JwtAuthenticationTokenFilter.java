@@ -37,7 +37,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     private RedisCache redisCache;
 
     // 放行接口的路径列表
-    private static final List<String> EXCLUDED_PATHS = Arrays.asList("/admin/login", "/admin/getCode", "/admin/logout");
+    private static final List<String> EXCLUDED_PATHS = Arrays.asList("/admin/login", "/admin/getCode");
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
