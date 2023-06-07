@@ -43,7 +43,8 @@ public class ProductServiceImpl implements ProductService {
         LambdaQueryWrapper<StoreProduct> wrapper = new LambdaQueryWrapper<>();
 
         // 判断是否有搜索
-        if (!StringUtils.isNoneBlank(keyword)) {
+        if ("null".equals(keyword)) { keyword = null; }
+        if (StringUtils.isNotEmpty(keyword)) {
             wrapper.like(StoreProduct::getProductName, keyword);
         }
 

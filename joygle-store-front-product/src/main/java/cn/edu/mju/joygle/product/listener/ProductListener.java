@@ -41,6 +41,6 @@ public class ProductListener {
             // 修改库存
             storeProduct.setProductStock(storeProduct.getProductStock() - product.getProductNumber());
             productMapper.updateById(storeProduct);
-        });
+});
     }
 }

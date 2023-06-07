@@ -57,7 +57,8 @@ public class OrdersServiceImpl implements OrdersService {
         LambdaQueryWrapper<StoreUserOrders> wrapper = new LambdaQueryWrapper<>();
 
         // 判断是否有搜索
-        if (!StringUtils.isNoneBlank(keyword)) {
+        if ("null".equals(keyword)) { keyword = null; }
+        if (StringUtils.isNotEmpty(keyword)) {
             wrapper.like(StoreUserOrders::getOrderId, keyword);
         }
 

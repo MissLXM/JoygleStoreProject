@@ -52,7 +52,8 @@ public class UserServiceImpl implements UserService {
         LambdaQueryWrapper<StoreUser> wrapper = new LambdaQueryWrapper<>();
 
         // 是否进行搜索
-        if (!StringUtils.isNoneBlank(keyword)) {
+        if ("null".equals(keyword)) { keyword = null; }
+        if (StringUtils.isNotEmpty(keyword)) {
             wrapper.like(StoreUser::getNickname, keyword);
         }
 
