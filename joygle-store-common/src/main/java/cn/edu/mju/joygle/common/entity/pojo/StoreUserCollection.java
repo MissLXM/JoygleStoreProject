@@ -10,7 +10,7 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * ClassName: StoreUserCollection
@@ -44,5 +44,5 @@ public class StoreUserCollection implements Serializable {
     @TableField("collection_time")
     @Schema(name= "collectionTime",description = "收藏时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT-8")
-    private Date collectionTime;
+    private Timestamp collectionTime;
 }

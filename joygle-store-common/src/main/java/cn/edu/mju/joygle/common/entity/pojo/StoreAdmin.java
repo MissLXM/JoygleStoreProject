@@ -6,7 +6,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * ClassName: StoreAdmin
@@ -42,12 +42,12 @@ public class StoreAdmin implements Serializable {
     @TableField("create_time")
     @Schema(name = "createTime",description = "创建时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT-8")
-    private Date createTime;
+    private Timestamp createTime;
 
     @TableField("update_time")
     @Schema(name = "updateTime",description = "更新时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT-8")
-    private Date updateTime;
+    private Timestamp updateTime;
 
     @TableField("admin_role")
     @Schema(name = "adminRole",description = "管理员角色")
