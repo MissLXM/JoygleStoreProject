@@ -60,7 +60,7 @@ public class CarouselController {
         return carouselService.carouselDelete(carouselId);
     }
 
-    @DeleteMapping("/deleteCarouselIds")
+    @DeleteMapping("/deleteByCarouselIds")
     @Tag(name = "deleteCarouselIds", description = "多轮播图删除")
     public Result deleteCarouselIds(@RequestBody DeleteCarouselIdsParams params) {
         return carouselService.deleteCarouselIds(params.getCarouselIds());

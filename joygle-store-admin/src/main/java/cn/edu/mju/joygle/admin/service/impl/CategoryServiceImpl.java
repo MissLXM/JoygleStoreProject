@@ -1,10 +1,13 @@
 package cn.edu.mju.joygle.admin.service.impl;
 
+import cn.edu.mju.joygle.admin.dto.CategoryDto;
+import cn.edu.mju.joygle.admin.dto.CategoryDtos;
 import cn.edu.mju.joygle.admin.mapper.CategoryMapper;
 import cn.edu.mju.joygle.admin.service.CategoryService;
 import cn.edu.mju.joygle.common.core.domain.Result;
 import cn.edu.mju.joygle.common.entity.pojo.StoreCategory;
 import cn.edu.mju.joygle.common.utils.StringUtils;
+import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -14,6 +17,7 @@ import org.aspectj.weaver.ast.Var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -57,7 +61,43 @@ public class CategoryServiceImpl implements CategoryService {
         if (categoryIPage.getRecords().size() == 0) {
             return Result.fail().message("查询失败");
         }
-        return Result.ok(categoryIPage).message("查询成功");
+
+        // 深拷贝
+        IPage<CategoryDtos> categoryDtosIPage = new Page<>(currentPage, pageSize);
+        BeanUtil.copyProperties(categoryIPage, categoryDtosIPage);
+
+        // 先查询一级类别
+        List<StoreCategory> categoryList = categoryMapper.selectList(
+                new LambdaQueryWrapper<StoreCategory>()
+                        .eq(StoreCategory::getCategoryParentId, 0)
+        );
+
+        // 准备参数
+        List<CategoryDtos> categoryDtoList = new ArrayList<>();
+
+        // 按一级类别的ID分类
+        categoryList.forEach(category -> {
+            // 类别分类
+            List<StoreCategory> categories = categoryMapper.selectList(
+                    new LambdaQueryWrapper<StoreCategory>()
+                            .eq(StoreCategory::getCategoryParentId,category.getCategoryId())
+            );
+            // 添加到返回的结果集中
+            CategoryDtos categoryDtos = new CategoryDtos();
+            List<CategoryDto> categorySuns = new ArrayList<>();
+            categories.forEach(dto -> {
+                // 封装二级类别
+                CategoryDto categoryDto = new CategoryDto();
+                BeanUtil.copyProperties(dto, categoryDto);
+                categorySuns.add(categoryDto);
+            });
+            // 封装一级类别
+            BeanUtil.copyProperties(category, categoryDtos);
+            categoryDtos.setCategorySuns(categorySuns);
+            categoryDtoList.add(categoryDtos);
+        });
+        categoryDtosIPage.setRecords(categoryDtoList);
+        return Result.ok(categoryDtosIPage).message("查询成功");
     }
 
     /**
@@ -90,7 +130,6 @@ public class CategoryServiceImpl implements CategoryService {
 
     /**
      * 类别删除
-     *
      * @param categoryId 类别ID
      * @return 结果集
      */
