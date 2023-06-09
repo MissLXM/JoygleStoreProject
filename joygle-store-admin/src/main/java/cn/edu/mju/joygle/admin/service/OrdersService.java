@@ -3,6 +3,8 @@ package cn.edu.mju.joygle.admin.service;
 import cn.edu.mju.joygle.common.core.domain.Result;
 import cn.edu.mju.joygle.common.entity.pojo.StoreUserOrders;
 
+import java.util.List;
+
 /**
  * ClassName: OrdersService
  * Package: cn.edu.mju.joygle.admin.service
@@ -28,4 +30,11 @@ public interface OrdersService {
      * @return 结果集
      */
     Result ordersInfoDelete(Integer ordersId);
+
+    /**
+     * 多订单删除
+     * @param ordersIds 多订单ID
+     * @return 结果集
+     */
+    Result deleteByOrdersIds(List<Integer> ordersIds);
 }

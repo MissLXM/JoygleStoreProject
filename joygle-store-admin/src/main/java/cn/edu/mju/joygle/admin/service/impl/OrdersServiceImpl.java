@@ -109,6 +109,18 @@ public class OrdersServiceImpl implements OrdersService {
         return getResult(rows);
     }
 
+    @Override
+    public Result deleteByOrdersIds(List<Integer> ordersIds) {
+        // 遍历删除
+        for(Integer orderId : ordersIds) {
+            int rows = ordersMapper.deleteById(orderId);
+            if (rows == 0) {
+                return Result.fail().message("订单为:" + orderId + "的订单删除失败");
+            }
+        }
+        return Result.ok().message("删除成功");
+    }
+
     /**
      * 判空返回
      * @param rows 影响行数

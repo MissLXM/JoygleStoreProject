@@ -3,6 +3,8 @@ package cn.edu.mju.joygle.admin.service;
 import cn.edu.mju.joygle.common.core.domain.Result;
 import cn.edu.mju.joygle.common.entity.pojo.StoreCarousel;
 
+import java.util.List;
+
 /**
  * ClassName: CarouselService
  * Package: cn.edu.mju.joygle.admin.service
@@ -41,4 +43,11 @@ public interface CarouselService {
      * @return 结果集
      */
     Result carouselDelete(Integer carouselId);
+
+    /**
+     * 多轮播图删除
+     * @param carouselIds 多轮播图ID
+     * @return 结果集
+     */
+    Result deleteCarouselIds(List<Integer> carouselIds);
 }

@@ -1,5 +1,7 @@
 package cn.edu.mju.joygle.admin.controller;
 
+import cn.edu.mju.joygle.admin.param.DeleteProductIdsParams;
+import cn.edu.mju.joygle.admin.param.DeleteUserIdsParams;
 import cn.edu.mju.joygle.admin.service.ProductService;
 import cn.edu.mju.joygle.common.core.domain.Result;
 import cn.edu.mju.joygle.common.entity.pojo.StoreProduct;
@@ -57,5 +59,11 @@ public class ProductController {
     @Tag(name = "productInfoDelete", description = "商品删除")
     public Result productInfoDelete(@PathVariable("productId") Integer productId) {
         return productService.productInfoDelete(productId);
+    }
+
+    @DeleteMapping("/deleteByProductIds")
+    @Tag(name = "deleteByProductIds", description = "多商品删除")
+    public Result deleteByProductIds(@RequestBody DeleteProductIdsParams params) {
+        return productService.deleteByProductIds(params.getProductIds());
     }
 }

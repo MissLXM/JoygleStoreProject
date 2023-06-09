@@ -13,6 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * ClassName: ProductServiceImpl
  * Package: cn.edu.mju.joygle.admin.service.impl
@@ -93,6 +95,18 @@ public class ProductServiceImpl implements ProductService {
         int rows = productMapper.deleteById(productId);
         // 判空返回
         return getResult(rows);
+    }
+
+    @Override
+    public Result deleteByProductIds(List<Integer> productIds) {
+        // 遍历删除
+        for (Integer productId : productIds) {
+            int rows = productMapper.deleteById(productId);
+            if (rows == 0) {
+                return Result.fail().message("商品ID为:" + productId + "的商品删除失败");
+            }
+        }
+        return Result.ok().message("删除成功");
     }
 
     /**

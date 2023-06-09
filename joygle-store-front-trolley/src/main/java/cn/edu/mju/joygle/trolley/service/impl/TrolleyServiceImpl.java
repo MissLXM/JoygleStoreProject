@@ -85,7 +85,8 @@ public class TrolleyServiceImpl implements TrolleyService {
             // 获取商品的购物车信息
             StoreUserTrolley userTrolley = trolleyMapper
                     .selectOne(new LambdaQueryWrapper<StoreUserTrolley>()
-                            .eq(StoreUserTrolley::getProductId,productDto.getProductId()));
+                            .eq(StoreUserTrolley::getProductId,productDto.getProductId())
+                            .eq(StoreUserTrolley::getUserId,userId));
             // 拷贝
             TrolleyDto trolleyDto = new TrolleyDto();
             BeanUtil.copyProperties(productDto, trolleyDto);

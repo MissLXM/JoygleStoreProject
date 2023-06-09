@@ -14,6 +14,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * ClassName: CarouselServiceImpl
  * Package: cn.edu.mju.joygle.admin.service.impl
@@ -86,6 +88,18 @@ public class CarouselServiceImpl implements CarouselService {
         int rows = carouselMapper.deleteById(carouselId);
         // 判空返回
         return getResult(rows);
+    }
+
+    @Override
+    public Result deleteCarouselIds(List<Integer> carouselIds) {
+        // 遍历删除
+        for (Integer carouselId : carouselIds) {
+            int rows = carouselMapper.deleteById(carouselId);
+            if (rows == 0) {
+                return Result.fail().message("轮播图ID为:" + carouselId +"的轮播图删除失败");
+            }
+        }
+        return Result.ok().message("删除成功");
     }
 
     /**

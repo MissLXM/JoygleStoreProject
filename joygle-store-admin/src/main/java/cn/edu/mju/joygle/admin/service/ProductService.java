@@ -3,6 +3,8 @@ package cn.edu.mju.joygle.admin.service;
 import cn.edu.mju.joygle.common.core.domain.Result;
 import cn.edu.mju.joygle.common.entity.pojo.StoreProduct;
 
+import java.util.List;
+
 /**
  * ClassName: ProductService
  * Package: cn.edu.mju.joygle.admin.service
@@ -42,4 +44,11 @@ public interface ProductService {
      * @return 结果集
      */
     Result productInfoDelete(Integer productId);
+
+    /**
+     * 删除多商品
+     * @param productIds 多商品ID
+     * @return 结果集
+     */
+    Result deleteByProductIds(List<Integer> productIds);
 }

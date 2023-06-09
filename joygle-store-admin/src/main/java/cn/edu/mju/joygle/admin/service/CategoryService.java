@@ -3,6 +3,8 @@ package cn.edu.mju.joygle.admin.service;
 import cn.edu.mju.joygle.common.core.domain.Result;
 import cn.edu.mju.joygle.common.entity.pojo.StoreCategory;
 
+import java.util.List;
+
 /**
  * ClassName: CategoryService
  * Package: cn.edu.mju.joygle.admin.service
@@ -42,4 +44,11 @@ public interface CategoryService {
      * @return 结果集
      */
     Result categoryInfoDelete(Integer categoryId);
+
+    /**
+     * 多类别删除
+     * @param categoryIds 多类别ID
+     * @return 结果集
+     */
+    Result deleteByCategoryIds(List<Integer> categoryIds);
 }

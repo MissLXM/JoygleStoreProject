@@ -10,8 +10,11 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.aspectj.weaver.ast.Var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 /**
@@ -93,10 +96,42 @@ public class CategoryServiceImpl implements CategoryService {
      */
     @Override
     public Result categoryInfoDelete(Integer categoryId) {
+        // 判断这个类别是否有二级类别
+        List<StoreCategory> categoryList = categoryMapper.selectList(
+                new LambdaQueryWrapper<StoreCategory>()
+                        .eq(StoreCategory::getCategoryParentId, categoryId)
+        );
+        // 判断是否为空
+        if (categoryList.size() != 0) {
+            return Result.fail().message("类别ID为:" + categoryId + "的类别有子类别,删除失败");
+        }
         // 根据ID删除
         int rows = categoryMapper.deleteById(categoryId);
         // 判空返回
         return getResult(rows);
+    }
+
+    @Override
+    public Result deleteByCategoryIds(List<Integer> categoryIds) {
+        // 遍历删除
+        for (Integer categoryId : categoryIds) {
+            // 判断这个类别是否有二级类别
+            List<StoreCategory> categoryList = categoryMapper.selectList(
+                    new LambdaQueryWrapper<StoreCategory>()
+                            .eq(StoreCategory::getCategoryParentId, categoryId)
+            );
+            // 判断是否为空
+            if (categoryList.size() != 0) {
+                return Result.fail().message("类别ID为:" + categoryId + "的类别有子类别,删除失败");
+            }
+
+            int rows = categoryMapper.deleteById(categoryId);
+
+            if (rows == 0) {
+                return Result.fail().message("类别ID为:" + categoryId + "的类别删除失败");
+            }
+        }
+        return Result.ok().message("删除成功");
     }
 
     /**

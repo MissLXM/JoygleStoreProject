@@ -3,6 +3,8 @@ package cn.edu.mju.joygle.admin.service;
 import cn.edu.mju.joygle.common.core.domain.Result;
 import cn.edu.mju.joygle.common.entity.pojo.StoreUser;
 
+import java.util.List;
+
 /**
  * ClassName: UserService
  * Package: cn.edu.mju.joygle.admin.service
@@ -42,4 +44,11 @@ public interface UserService {
      * @return 结果集
      */
     Result userInfoDelete(Integer userId);
+
+    /**
+     * 删除多用户信息
+     * @param userIds 多用户ID
+     * @return 结果集
+     */
+    Result deleteByUserIds(List<Integer> userIds);
 }

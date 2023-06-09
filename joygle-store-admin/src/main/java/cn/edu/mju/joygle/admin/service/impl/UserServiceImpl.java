@@ -137,6 +137,18 @@ public class UserServiceImpl implements UserService {
         return getResult(rows);
     }
 
+    @Override
+    public Result deleteByUserIds(List<Integer> userIds) {
+        // 遍历删除
+        for(Integer userId : userIds) {
+            int rows = userMapper.deleteById(userId);
+            if (rows == 0) {
+                return Result.fail().message("用户ID为:" + userId + "的用户删除失败");
+            }
+        }
+        return Result.ok().message("用户删除成功");
+    }
+
     /**
      * 判空返回
      * @param rows 影响行数

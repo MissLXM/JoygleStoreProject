@@ -1,5 +1,6 @@
 package cn.edu.mju.joygle.admin.controller;
 
+import cn.edu.mju.joygle.admin.param.DeleteUserIdsParams;
 import cn.edu.mju.joygle.admin.service.UserService;
 import cn.edu.mju.joygle.common.core.domain.Result;
 import cn.edu.mju.joygle.common.entity.pojo.StoreUser;
@@ -57,5 +58,11 @@ public class UserController {
     @Tag(name = "userInfoDelete", description = "用户删除")
     public Result userInfoDelete(@PathVariable("userId") Integer userId) {
         return userService.userInfoDelete(userId);
+    }
+
+    @DeleteMapping("/deleteByUserIds")
+    @Tag(name = "deleteByUserIds", description = "多用户删除")
+    public Result deleteByUserIds(@RequestBody DeleteUserIdsParams params) {
+        return userService.deleteByUserIds(params.getUserIds());
     }
 }

@@ -84,6 +84,11 @@ public class UserController {
         return Result.ok().message("注册成功");
     }
 
+    public static void main(String[] args) {
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        System.out.println(bCryptPasswordEncoder.encode("123456"));
+    }
+
     @PutMapping("/updateUser")
     @Tag(name = "updateUser", description = "用户修改")
     public Result updateUser(@RequestBody @Validated StoreUser user, BindingResult result) {
@@ -94,8 +99,11 @@ public class UserController {
         }
 
         // 2.密码加密
-        String newPwd = new BCryptPasswordEncoder().encode(user.getPassword());
-        user.setPassword(newPwd);
+        String password = service.usernameCheck(user.getUsername()).getData().getPassword();
+        if (!new BCryptPasswordEncoder().matches(user.getPassword(), password)) {
+            String newPwd = new BCryptPasswordEncoder().encode(user.getPassword());
+            user.setPassword(newPwd);
+        }
 
         // 3.判断是否修改成功
         if (!service.updateById(user)) {
