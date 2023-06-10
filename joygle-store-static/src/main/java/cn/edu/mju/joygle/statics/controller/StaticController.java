@@ -31,9 +31,9 @@ public class StaticController {
     private String picturePath;
     @PostMapping("/downloadAvatar")
     @Tag(name = "downloadAvatar", description = "头像存储")
-    public Result downloadAvatar(@RequestParam("avatar") MultipartFile avatarFile) {
+    public Result downloadAvatar(MultipartFile file) {
         // 判空
-        if (!avatarFile.isEmpty()) {
+        if (!file.isEmpty()) {
 
             // 获取项目根路径
             String rootPath = Objects.requireNonNull
@@ -56,12 +56,12 @@ public class StaticController {
             int count = Objects.requireNonNull(filePath.listFiles()).length;
 
             // 头像名称设置(文件数量 + 1)
-            String avatarName = (count + 1) + "." + StringUtils.getFilenameExtension(avatarFile.getOriginalFilename());
+            String avatarName = (count + 1) + "." + StringUtils.getFilenameExtension(file.getOriginalFilename());
 
             // 保存头像
-            File file = new File(rootPath + projectPath,avatarName);
+            File fileOne = new File(rootPath + projectPath,avatarName);
             try {
-                avatarFile.transferTo(file);
+                file.transferTo(fileOne);
             } catch (IOException e) {
                 return Result.fail().message("图片下载失败");
             }

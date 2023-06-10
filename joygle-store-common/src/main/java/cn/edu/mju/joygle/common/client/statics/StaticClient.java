@@ -4,7 +4,6 @@ import cn.edu.mju.joygle.common.core.domain.Result;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -19,5 +18,5 @@ import org.springframework.web.multipart.MultipartFile;
 public interface StaticClient {
 
     @PostMapping(value = "/static/downloadAvatar",consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    Result downloadAvatar(@RequestPart("avatar") MultipartFile avatarFile);
+    Result downloadAvatar(MultipartFile file);
 }

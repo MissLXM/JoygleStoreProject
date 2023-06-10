@@ -1,7 +1,5 @@
 package cn.edu.mju.joygle.admin.controller;
 
-import cn.edu.mju.joygle.admin.param.DeleteProductIdsParams;
-import cn.edu.mju.joygle.admin.param.DeleteUserIdsParams;
 import cn.edu.mju.joygle.admin.service.ProductService;
 import cn.edu.mju.joygle.common.core.domain.Result;
 import cn.edu.mju.joygle.common.entity.pojo.StoreProduct;
@@ -11,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * ClassName: ProductController
@@ -63,7 +63,7 @@ public class ProductController {
 
     @DeleteMapping("/deleteByProductIds")
     @Tag(name = "deleteByProductIds", description = "多商品删除")
-    public Result deleteByProductIds(@RequestBody DeleteProductIdsParams params) {
-        return productService.deleteByProductIds(params.getProductIds());
+    public Result deleteByProductIds(@RequestParam("productIds") List<Integer> productIds) {
+        return productService.deleteByProductIds(productIds);
     }
 }

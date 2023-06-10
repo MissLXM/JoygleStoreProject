@@ -1,6 +1,5 @@
 package cn.edu.mju.joygle.admin.controller;
 
-import cn.edu.mju.joygle.admin.param.DeleteUserIdsParams;
 import cn.edu.mju.joygle.admin.service.UserService;
 import cn.edu.mju.joygle.common.core.domain.Result;
 import cn.edu.mju.joygle.common.entity.pojo.StoreUser;
@@ -10,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * ClassName: UserController
@@ -62,7 +63,7 @@ public class UserController {
 
     @DeleteMapping("/deleteByUserIds")
     @Tag(name = "deleteByUserIds", description = "多用户删除")
-    public Result deleteByUserIds(@RequestBody DeleteUserIdsParams params) {
-        return userService.deleteByUserIds(params.getUserIds());
+    public Result deleteByUserIds(@RequestParam("userIds") List<Integer> userIds) {
+        return userService.deleteByUserIds(userIds);
     }
 }

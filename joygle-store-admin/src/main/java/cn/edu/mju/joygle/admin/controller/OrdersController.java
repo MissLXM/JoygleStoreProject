@@ -1,16 +1,13 @@
 package cn.edu.mju.joygle.admin.controller;
 
-import cn.edu.mju.joygle.admin.param.DeleteOrdersIdsParams;
-import cn.edu.mju.joygle.admin.param.DeleteProductIdsParams;
 import cn.edu.mju.joygle.admin.service.OrdersService;
 import cn.edu.mju.joygle.common.core.domain.Result;
-import cn.edu.mju.joygle.common.entity.pojo.StoreUserOrders;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * ClassName: OrdersController
@@ -45,7 +42,7 @@ public class OrdersController {
 
     @DeleteMapping("/deleteByOrdersIds")
     @Tag(name = "deleteByOrdersIds", description = "多订单删除")
-    public Result deleteByOrdersIds(@RequestBody DeleteOrdersIdsParams params) {
-        return ordersService.deleteByOrdersIds(params.getOrdersIds());
+    public Result deleteByOrdersIds(@RequestParam("ordersIds") List<Integer> ordersIds) {
+        return ordersService.deleteByOrdersIds(ordersIds);
     }
 }

@@ -122,12 +122,12 @@ public class UserController {
 
     @PutMapping("/updateUserAvatar")
     @Tag(name = "updateUserAvatar", description = "用户头像修改")
-    public Result updateUserAvatar(@RequestPart("avatar") MultipartFile avatarFile, Principal principal) {
+    public Result updateUserAvatar(MultipartFile file, Principal principal) {
 
         if (principal != null) {
             // 获取用户ID
             Integer userId = service.usernameCheck(principal.getName()).getData().getUserId();
-            return service.updateUserAvatar(userId, avatarFile);
+            return service.updateUserAvatar(userId, file);
         }
         return Result.ok().message("用户头像修改成功");
     }

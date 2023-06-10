@@ -1,7 +1,5 @@
 package cn.edu.mju.joygle.admin.controller;
 
-import cn.edu.mju.joygle.admin.param.DeleteCarouselIdsParams;
-import cn.edu.mju.joygle.admin.param.DeleteOrdersIdsParams;
 import cn.edu.mju.joygle.admin.service.CarouselService;
 import cn.edu.mju.joygle.common.core.domain.Result;
 import cn.edu.mju.joygle.common.entity.pojo.StoreCarousel;
@@ -11,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * ClassName: CarouselController
@@ -62,7 +62,7 @@ public class CarouselController {
 
     @DeleteMapping("/deleteByCarouselIds")
     @Tag(name = "deleteCarouselIds", description = "多轮播图删除")
-    public Result deleteCarouselIds(@RequestBody DeleteCarouselIdsParams params) {
-        return carouselService.deleteCarouselIds(params.getCarouselIds());
+    public Result deleteCarouselIds(@RequestParam("carouselIds") List<Integer> carouselIds) {
+        return carouselService.deleteCarouselIds(carouselIds);
     }
 }
